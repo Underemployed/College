@@ -25,15 +25,3 @@ var twoSum=function(nums,target){
 //     }
 // };
 
-var twoSum=function(nums,target){
-    hash={}
-    for(let i=0;i<nums.length;i++){
-        hash[nums[i]]=i;
-    }
-    for(let i=0;i<nums.length;i++){
-        let potkey=target-nums[i]
-        if(hash[potkey] && hash[potkey] !==i){
-            return [hash[potkey],i]
-        }
-    }
-};
