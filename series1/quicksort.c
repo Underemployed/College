@@ -24,8 +24,9 @@ int pivot(int *a, int left, int right) {
     }
 
     i++;
-    swap(&a[i], &a[pivot]);
-    return i;
+    swap(&a[i], &a[pivot]);// all values left of pivot small and similarly all values right of pivot is larger
+    return i;// by doing this recursively and sorting by finding pivot ((all elements get sorted))
+
 }
 
 // Recursive function to perform QuickSort
