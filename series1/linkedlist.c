@@ -71,6 +71,7 @@ void delete()
 void insert()
 {
     int pos, data, i = 1;
+    create();
     printf("Enter index to be inserted: ");
     scanf("%d", &pos);
     printf("Enter value: ");
@@ -109,33 +110,32 @@ void reverse(struct node *head)
 
 int main()
 {
-    int choice;
+    char choice;
     while (1)
     {
-        printf("\n1. Traverse\n3. Insert\n4. Delete\n5. Reverse\n6. Exit\n");
+        create();
+        printf("\n1. Traverse\n2. Insert\n3. Delete\n4. Reverse\nAny other input to Exit\n");
         printf("Enter your choice:");
-        scanf("%d", &choice);
+        scanf(" %c", &choice);
 
         switch (choice)
         {
-        case 1:
+        case '1':
             traverse();
             break;
-        case 3:
+        case '2':
             insert();
             break;
-        case 4:
+        case '3':
             delete ();
             break;
-        case 5:
+        case '4':
             reverse(start);
             break;
-        case 6:
-            exit(0);
         default:
-            printf("Invalid choice\n");
+            printf("Exiting\n");
+            exit(0);
         }
-        printf("\n");
     }
 
     return 0;
