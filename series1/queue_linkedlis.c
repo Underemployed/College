@@ -5,8 +5,9 @@ struct node
     int data;
     struct node *link;
 };
-struct node *start;
 
+struct node *start;
+int n, actual;
 void traverse()
 {
     int i = 1;
@@ -19,13 +20,15 @@ void traverse()
             curr = curr->link;
             i++;
         }
+        printf("front =%d,rear=%d");
+
     }
 }
 void create()
 {
     if (start == NULL)
     {
-        int n, i;
+        int i;
         struct node *curr, *prev;
         curr = malloc(sizeof(struct node));
         curr->data = 1;
@@ -44,83 +47,88 @@ void create()
     }
 }
 
-void delete()
+void dequeue()
 {
-    int pos, i = 1;
-    printf("Enter index to be deleted: ");
-    scanf("%d", &pos);
-    struct node *curr = start;
-    if (pos <= 1)
+    if (start != NULL)
     {
-        curr = curr->link;
-        start = curr;
-    }
-    else
-    {
+
+        struct node *curr = start;
+        if (actual == 1)
+        {
+            start = NULL;
+            return;
+        }
+
         struct node *prev;
-        while (i < pos && curr->link != NULL)
+        while (curr->link != NULL)
         {
             prev = curr;
             curr = curr->link;
-            i++;
         }
         prev->link = curr->link;
     }
-    traverse();
-}
-void insert()
-{
-    int pos, data, i = 1;
-    create();
-    printf("Enter index to be inserted: ");
-    scanf("%d", &pos);
-    printf("Enter value: ");
-    scanf("%d", &data);
-
-    struct node *curr = start, *newnode;
-    newnode = malloc(sizeof(struct node));
-    newnode->data = data;
-
-    if (pos <= 1)
-    {
-        newnode->link = start;
-        start = newnode;
-    }
     else
     {
+        printf("\nQueue is Empty*********\n\n");
+    }
+    traverse();
+}
+void length()
+{
+    actual = 0;
+    struct node *curr = start;
+    while (curr != NULL)
+    {
+        curr = curr->link;
+        actual++;
+    }
+}
+void push()
+{
+    if (actual < n)
+    {
+                int data;
+        printf("Enter value: ");
+        scanf("%d", &data);
+
+        struct node *curr = start, *newnode;
+        newnode = malloc(sizeof(struct node));
+        newnode->data = data;
+        if (actual <=0) {
+            start = newnode;
+            newnode->link=NULL;
+        }
+
+
         struct node *prev;
-        while (i < pos && curr->link != NULL)
+        while (curr != NULL)
         {
             prev = curr;
             curr = curr->link;
-            i++;
         }
         newnode->link = prev->link;
         prev->link = newnode;
+        newnode->link=NULL;
+    }
+    else
+    {
+        printf("\nQueue Full*********\n\n");
     }
     traverse();
 }
-
-
-void reverse(struct node *head)
-{
-    if (head == NULL)
-        return;
-    reverse(head->link);
-    printf("%d\n", head->data);
-}
-    
 
 int main()
 {
     char choice;
     create();
-
     while (1)
     {
-        printf("\n1. Traverse\n2. Insert\n3. Delete\n4. Reverse\nAny other input to Exit\n");
+        length();
+        printf("\n1. Traverse\n2. Push\n3. pop\nAny other input to Exit\n");
         printf("Enter your choice:");
         scanf(" %c", &choice);
+
+
 
         switch (choice)
         {
@@ -128,13 +136,10 @@ int main()
             traverse();
             break;
         case '2':
-            insert();
+            push();
             break;
         case '3':
-            delete ();
-            break;
-        case '4':
-            reverse(start);
+            dequeue();
             break;
         default:
             printf("Exiting\n");

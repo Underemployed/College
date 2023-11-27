@@ -3,7 +3,8 @@
 struct node
 {
     int data;
-    struct node *link;
+    struct node *next;
+    struct node *back;
 };
 struct node *start;
 
@@ -16,7 +17,7 @@ void traverse()
         while (curr != NULL)
         {
             printf("%d)%d ", i, curr->data);
-            curr = curr->link;
+            curr = curr->next;
             i++;
         }
     }
@@ -29,6 +30,7 @@ void create()
         struct node *curr, *prev;
         curr = malloc(sizeof(struct node));
         curr->data = 1;
+        curr->back =NULL;
         printf("how many nodes do u want: ");
         scanf("%d", &n);
         start = curr;
@@ -37,9 +39,11 @@ void create()
             prev = curr;
             curr = malloc(sizeof(struct node));
             curr->data = i;
-            prev->link = curr;
+            curr->back = prev;
+            prev->next = curr;
         }
-        curr->link = NULL;
+        curr->next = NULL;
+
         traverse();
     }
 }
@@ -52,19 +56,19 @@ void delete()
     struct node *curr = start;
     if (pos <= 1)
     {
-        curr = curr->link;
+        curr = curr->next;
         start = curr;
     }
     else
     {
         struct node *prev;
-        while (i < pos && curr->link != NULL)
+        while (i < pos && curr->next != NULL)
         {
             prev = curr;
-            curr = curr->link;
+            curr = curr->next;
             i++;
         }
-        prev->link = curr->link;
+        prev->next = curr->next;
     }
     traverse();
 }
@@ -72,6 +76,7 @@ void insert()
 {
     int pos, data, i = 1;
     create();
+
     printf("Enter index to be inserted: ");
     scanf("%d", &pos);
     printf("Enter value: ");
@@ -83,41 +88,48 @@ void insert()
 
     if (pos <= 1)
     {
-        newnode->link = start;
+        newnode->next = start;
         start = newnode;
     }
     else
     {
         struct node *prev;
-        while (i < pos && curr->link != NULL)
+        while (i < pos && curr->next != NULL)
         {
             prev = curr;
-            curr = curr->link;
+            curr = curr->next;
             i++;
         }
-        newnode->link = prev->link;
-        prev->link = newnode;
+        newnode->next = prev->next;
+        prev->next = newnode;
     }
     traverse();
 }
-
-
 void reverse(struct node *head)
 {
-    if (head == NULL)
-        return;
-    reverse(head->link);
-    printf("%d\n", head->data);
-}
-    
 
+    int i = 1;
+    if (start != NULL)
+    {
+        while (start->next != NULL)
+        {
+            start = start->next;
+        }
+        struct node *curr = start;
+        while (curr != NULL)
+        {
+            printf("%d)%d ", i, curr->data);
+            curr = curr->back;
+            i++;
+        }
+    }
+}
 int main()
 {
     char choice;
-    create();
-
     while (1)
     {
+        create();
         printf("\n1. Traverse\n2. Insert\n3. Delete\n4. Reverse\nAny other input to Exit\n");
         printf("Enter your choice:");
         scanf(" %c", &choice);
@@ -136,6 +148,7 @@ int main()
         case '4':
             reverse(start);
             break;
+
         default:
             printf("Exiting\n");
             exit(0);
