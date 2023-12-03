@@ -11,7 +11,8 @@ void swap(int *c, int *b)
 void bubbleSort(int *a, int n)
 {
     int i, j;
-    for (i = 0; i < n - 1; i++)
+    int k;
+    for (i = 0; i < n; i++)
     {
         for (j = 0; j < n - i - 1; j++)
         {
@@ -20,6 +21,13 @@ void bubbleSort(int *a, int n)
                 swap(&a[j], &a[j + 1]);
             }
         }
+        // for (k = 0; k < n; k++)
+        // {
+        //     printf("%d ", a[k]);
+        // }
+        // printf("\ni=%d,j=%d", i, j);
+
+        // printf("\n");
     }
 }
 
