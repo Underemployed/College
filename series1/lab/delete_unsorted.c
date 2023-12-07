@@ -55,9 +55,9 @@ void main()
     int no_unsorted = 1;
     struct node *i = head;
 
-    while (i->next != NULL)
+    while (i != NULL && i->next != NULL) // checking if i or i-> next is NULL....
     {
-        if (i->data > i->next->data)
+        if (i->data > i->next->data) // never forget check values u compare otherwise error here i need to check i and i->next are null or not
         {
             i->next = i->next->next;
             no_unsorted = 0;
