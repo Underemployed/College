@@ -98,37 +98,23 @@ void delete()
     }
     traverse();
 }
-void insert()
-{
-    int pos, data, i = 1;
-    printf("Enter index to be inserted: ");
-    scanf("%d", &pos);
-    printf("Enter value: ");
-    scanf("%d", &data);
-
-    struct node *curr = start, *newnode;
-    newnode = malloc(sizeof(struct node));
+void insert() {
+    int pos, data;
+    printf("Enter index to be inserted: "); scanf("%d", &pos);
+    printf("Enter value: ");scanf("%d", &data);
+    struct node *newnode = malloc(sizeof(struct node));
     newnode->data = data;
-
-    if (pos <= 1)
-    {
+    if (pos <= 1) {
         newnode->link = start;
         start = newnode;
-    }
-    else
-    {
-        struct node *prev;
-        while (i < pos && curr->link != NULL)
-        {
-            prev = curr;
-            curr = curr->link;
-            i++;
-        }
+    } else {
+        struct node *curr = start, *prev = NULL;
+        for (int i = 1; i < pos && curr; i++, prev = curr, curr = curr->link);
         newnode->link = prev->link;
         prev->link = newnode;
     }
-    traverse();
 }
+
 struct node *Sort_insertTerm(struct node *head, int val)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
