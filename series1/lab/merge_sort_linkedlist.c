@@ -100,17 +100,17 @@ struct node *merge(struct node *head1, struct node *head2)
     return merge;
 }
 
-struct node* rot( struct node* head){
-    struct node* last,*temp=head;
-    while(temp->next->next!=NULL) temp=temp->next;
-    last =temp->next;
-    last->next =head->next;
+struct node *rot(struct node *head)
+{
+    struct node *last, *temp = head;
+    while (temp->next->next != NULL)
+        temp = temp->next;
+    last = temp->next;
+    last->next = head->next;
     head->next = NULL;
-       temp->next=head;
+    temp->next = head;
     head = last;
-return head;
-    
-    
+    return head;
 }
 
 struct node *sort(struct node *org)
@@ -137,8 +137,8 @@ int main()
 
     merged = sort(merged);
     traverse(merged);
-    
-    merged=rot(merged);
+
+    merged = rot(merged);
     traverse(merged);
     return 0;
 }

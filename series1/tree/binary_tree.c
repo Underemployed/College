@@ -128,10 +128,65 @@ void levelordertraversal(struct node *root)
                 nodeCount--;
             }
 
-            printf("\n"); 
+            printf("\n");
         }
     }
 }
+
+struct node *insert(struct node *root, int val)
+{
+    if (root == NULL)
+        return newNode(val);
+    else if (root->data > val)
+    {
+        root->left = insert(root->left, val);
+    }
+    else
+    {
+        root->right = insert(root->right, val);
+    }
+
+    return root;
+}
+int min(struct node *root)
+{
+    int minv = root->data;
+    while (root->left != NULL)
+    {
+        minv = root->data;
+        root = root->left;
+    }
+    return minv;
+}
+struct node *delete(struct node *root, int val)
+{
+    if (root == NULL)
+        return root;
+    if (root->data > val)
+    {
+        root->left = delete (root->left, val);
+    }
+    else if (root->data < val)
+    {
+        root->right = delete (root->right, val);
+    }
+    else
+    {
+        if (root->right == NULL)
+        {
+            return root->left;
+        }
+        else if (root->left == NULL)
+        {
+            return root->right;
+        }
+
+        root->data = min(root->right);
+        root->right = delete (root->right, root->data);
+    }
+    return root;
+}
+
 void main()
 {
     struct node *root = newNode(1);
@@ -140,6 +195,16 @@ void main()
     root->left->left = newNode(4);
     root->left->right = newNode(5);
     root->right->left = newNode(6);
+
+    preorder(root);
+    printf("\n");
+    inorder(root);
+    printf("\n");
+    postorder(root);
+    printf("\n");
+    root = insert(root, 7);
+    root = insert(root, 8);
+    root = delete (root, 7);
     preorder(root);
     printf("\n");
     inorder(root);
