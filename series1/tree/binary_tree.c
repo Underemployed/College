@@ -106,7 +106,7 @@ int size() { return rear - front + 1; }
 // }
 
 void levelordertraversal(struct node *root)
-{
+{ 
     if (root == NULL)
         printf("Tree empty");
     else
@@ -132,59 +132,17 @@ void levelordertraversal(struct node *root)
         }
     }
 }
-
-struct node *insert(struct node *root, int val)
+int search(struct node *root, int x)
 {
-    if (root == NULL)
-        return newNode(val);
-    else if (root->data > val)
+    if (root != NULL)
     {
-        root->left = insert(root->left, val);
-    }
-    else
-    {
-        root->right = insert(root->right, val);
-    }
+        int left = search(root, x);
 
-    return root;
-}
-int min(struct node *root)
-{
-    int minv = root->data;
-    while (root->left != NULL)
-    {
-        minv = root->data;
-        root = root->left;
+        int right = search(root, x);
+        if (left || right)
+            return 1;
     }
-    return minv;
-}
-struct node *delete(struct node *root, int val)
-{
-    if (root == NULL)
-        return root;
-    if (root->data > val)
-    {
-        root->left = delete (root->left, val);
-    }
-    else if (root->data < val)
-    {
-        root->right = delete (root->right, val);
-    }
-    else
-    {
-        if (root->right == NULL)
-        {
-            return root->left;
-        }
-        else if (root->left == NULL)
-        {
-            return root->right;
-        }
-
-        root->data = min(root->right);
-        root->right = delete (root->right, root->data);
-    }
-    return root;
+    return 0;
 }
 
 void main()
@@ -202,9 +160,9 @@ void main()
     printf("\n");
     postorder(root);
     printf("\n");
-    root = insert(root, 7);
-    root = insert(root, 8);
-    root = delete (root, 7);
+    // root = insert(root, 7);
+    // root = insert(root, 8);
+    // root = delete (root, 7);
     preorder(root);
     printf("\n");
     inorder(root);
@@ -212,4 +170,8 @@ void main()
     postorder(root);
     printf("\n");
     levelordertraversal(root);
+    if (search(root, 5))
+    {
+        printf("FOund\n");
+    }
 }
