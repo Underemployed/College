@@ -1,8 +1,11 @@
 # Dynamic Programming
 
-- [FreeCodeCamp Video](https://youtu.be/oBt53YbR9Kk)
-  To run the code, navigate to  
-  `LeetCode/dynamic_programming`
+[FreeCodeCamp Video](https://youtu.be/oBt53YbR9Kk)<br>
+To run the code, navigate to <br>
+
+###
+
+    LeetCode/dynamic_programming
 
 ## Approach
 
