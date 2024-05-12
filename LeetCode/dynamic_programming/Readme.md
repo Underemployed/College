@@ -5,7 +5,7 @@ To run the code, navigate to <br>
 
 ###
 
-    LeetCode/dynamic_programming
+cd LeetCode/dynamic_programming
 
 ## Approach
 
