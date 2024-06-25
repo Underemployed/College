@@ -123,6 +123,9 @@ SELECT COUNT(c.custid) num_customers
 FROM customer c
 JOIN loan l ON c.custid = l.custid
 WHERE c.city = 'Kottayam';
+SELECT COUNT(custid) num_customers
+FROM loan 
+where custid in (SELECT custid from customer where city = "Kottayam");
 -- +---------------+
 -- | num_customers |
 -- +---------------+
@@ -139,10 +142,10 @@ FROM loan;
 -- +---------------------+
 
 -- (h) Display the total loan which is given from each branch.
-SELECT b.branchname, SUM(l.amount) total_loan
+SELECT branchname, SUM(amount) total_loan
 FROM branch b
 JOIN loan l ON b.branchid = l.branchid
-GROUP BY b.branchname;
+GROUP BY branchname;
 -- +-------------------+------------+
 -- | branchname        | total_loan |
 -- +-------------------+------------+
@@ -152,10 +155,10 @@ GROUP BY b.branchname;
 -- +-------------------+------------+
 
 -- (i) Display the total deposit amount branch-wise.
-SELECT b.branchname, SUM(d.amount) total_deposit
+SELECT branchname, SUM(amount) total_deposit
 FROM branch b
 JOIN deposit d ON b.branchid = d.branchid
-GROUP BY b.branchname;
+GROUP BY branchname;
 -- +-------------------+---------------+
 -- | branchname        | total_deposit |
 -- +-------------------+---------------+
@@ -165,10 +168,10 @@ GROUP BY b.branchname;
 -- +-------------------+---------------+
 
 -- (j) List the total deposit of customers living in Thiruvananthapuram.
-SELECT SUM(d.amount) total_deposit_thiruvananthapuram
+SELECT SUM(amount) total_deposit_thiruvananthapuram
 FROM deposit d
 JOIN customer c ON d.custid = c.custid
-WHERE c.city = 'Thiruvananthapuram';
+WHERE city = 'Thiruvananthapuram';
 
 -- +----------------------------------+
 -- | total_deposit_thiruvananthapuram |
@@ -188,11 +191,11 @@ WHERE c.city = 'Kochi';
 -- +-----------------------+
 
 -- (l) Count the number of customers in each branch.
-SELECT b.branchname, COUNT(DISTINCT d.custid) num_customers
+SELECT branchname, COUNT(DISTINCT d.custid) num_customers
 FROM branch b
-LEFT JOIN deposit d ON b.branchid = d.branchid
-LEFT JOIN loan l ON b.branchid = l.branchid
-GROUP BY b.branchname;
+ JOIN deposit d ON b.branchid = d.branchid
+ JOIN loan l ON b.branchid = l.branchid
+GROUP BY branchname;
 -- +-------------------+---------------+
 -- | branchname        | num_customers |
 -- +-------------------+---------------+
@@ -202,10 +205,10 @@ GROUP BY b.branchname;
 -- +-------------------+---------------+
 
 -- (m) Find the maximum loan amount of each branch.
-SELECT b.branchname, MAX(l.amount) max_loan_amount
+SELECT branchname, MAX(amount) max_loan_amount
 FROM branch b
 LEFT JOIN loan l ON b.branchid = l.branchid
-GROUP BY b.branchname;
+GROUP BY branchname;
 -- +-------------------+-----------------+
 -- | branchname        | max_loan_amount |
 -- +-------------------+-----------------+
@@ -215,12 +218,12 @@ GROUP BY b.branchname;
 -- +-------------------+-----------------+
 
 -- (n) List the total deposit amount per branch by customers after 1st Jan 2022.
-SELECT b.branchname, SUM(d.amount) total_deposit
+SELECT branchname, SUM(amount) total_deposit
 FROM branch b
 JOIN deposit d ON b.branchid = d.branchid
 JOIN customer c ON d.custid = c.custid
-WHERE d.date > '2022-01-01'
-GROUP BY b.branchname;
+WHERE date > '2022-01-01'
+GROUP BY branchname;
 -- +-------------------+---------------+
 -- | branchname        | total_deposit |
 -- +-------------------+---------------+
@@ -228,3 +231,5 @@ GROUP BY b.branchname;
 -- | central branch    |       3500.00 |
 -- | west coast branch |       4200.00 |
 -- +-------------------+---------------+
+
+

@@ -2,14 +2,14 @@ package JAVA;
 
 import java.util.Scanner;
 
-class multithreadthing extends Thread {
+class multithreadthing implements Runnable {
     private int threadnumber;
     public multithreadthing(int i){
         threadnumber = i;
     }
     @Override
     public void run() {
-        for (int i = 0; i <= 3; i++) {
+        for (int i = 0; i <= 5; i++) {
             System.out.println(i + " from thread number "+threadnumber);
 
             // if(threadnumber == 3 ) throw new RuntimeException();
@@ -31,9 +31,11 @@ class multithread {
         for (int i = 0; i < 5; i++) {
             // 1
             multithreadthing mything = new multithreadthing(i);
-            mything.start();
+            Thread mythread = new Thread(mything);
+            mythread.start();
+            mythread.isAlive();
+           
         }
-        throw new RuntimeException();
 
 
         // // 1
