@@ -1,30 +1,54 @@
 package JAVA.S5.Echo;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.Buffer;
+import java.util.Scanner;
 
 public class EchoClient {
-
+    static  Scanner reader ;
+    static  PrintWriter sender;
 
     public static void main(String[] args) {
-        
+
         try {
             System.out.println("Client Started");
-            Socket soc = new Socket("localhost", 9801);
-            BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Enter a string:");
-            String str = userInput.readLine();
-            PrintWriter out = new PrintWriter(soc.getOutputStream(), true); //auto flush true getting data from keyboard
-            out.println(str); // sending to server
-            out.flush();// not needed if auto flush true
+            Socket server = new Socket("localhost", 9801);
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(soc.getInputStream())); // getting data from server
-            System.out.println(in.readLine()); // printing data
- 
+            InputStream input = server.getInputStream();
+            OutputStream output = server.getOutputStream();
+
+            Scanner sc = new Scanner(System.in);
+            reader = new Scanner(input);
+            sender = new PrintWriter(output,true);
+
+            // print all received msg 
+            Thread printer = new Thread(
+                new Runnable(){
+                    public void run(){
+                        String m ="";
+                        while (true){
+                            if(!((m = reader.nextLine()).equals("bye"))) 
+                            System.out.println("Server: "+m);
+                            else break;
+                        }
+                    }
+
+                }
+            );
+            printer.start();
+
+            String m ="";
+            while (true) {
+                if (!((m = sc.nextLine()).equals("bye"))) sender.println(m);
+                else break;
+            }
+            printer.stop();
+            server.close();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
