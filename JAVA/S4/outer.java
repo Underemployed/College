@@ -1,4 +1,4 @@
-package JAVA;
+package JAVA.S4;
 public class outer{
     String  a ="nothing";
     public void wat(){
