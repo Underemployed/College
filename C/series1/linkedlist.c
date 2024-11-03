@@ -54,6 +54,8 @@ void create()
         i++;
     }
 }
+
+
 struct node *insertTerm(struct node *head, int val)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
@@ -74,6 +76,9 @@ struct node *insertTerm(struct node *head, int val)
     }
     return head;
 }
+
+
+
 void delete()
 {
     int pos, i = 1;
@@ -98,6 +103,8 @@ void delete()
     }
     traverse();
 }
+
+
 void insert() {
     int pos, data;
     printf("Enter index to be inserted: "); scanf("%d", &pos);
@@ -114,6 +121,7 @@ void insert() {
         prev->link = newnode;
     }
 }
+
 
 struct node *Sort_insertTerm(struct node *head, int val)
 {
@@ -137,6 +145,8 @@ struct node *Sort_insertTerm(struct node *head, int val)
     }
     return head;
 }
+
+
 void reverse(struct node *head)
 {
     if (head == NULL)
@@ -144,6 +154,9 @@ void reverse(struct node *head)
     reverse(head->link);
     printf("%d\n", head->data);
 }
+
+
+
 
 int main()
 {
