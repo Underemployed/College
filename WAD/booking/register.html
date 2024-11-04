@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Underemployed - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">
+                Underemployed
+            </a></div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">Map</a></li>
+            <button><a href="login.html">Login</a></button>
+            <button><a href="register.html">Register</a></button>
+        </ul>
+
+    </nav>
+
+
+        <section class="body">
+            <form action="">
+                <h1>Register</h1>
+                <div class="idk">
+                    <label for="username" >Username</label>
+                    <input type="text" name="username" id = "username">
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id = "password">
+                </div>
+                <input type="submit" name="submit" onclick="register()">
+        
+        
+            </form>
+        </section>
+<script >
+    function register(){
+        // e.preventDefault()
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        if(username && password) {
+            if (!localStorage.getItem(username)){
+
+                localStorage.setItem(username,password)
+                alert("Registration successful");
+                window.location.href = "login.html";
+            } else {
+                alert(
+                    "Registration failed"
+                );
+            }
+        }
+            else{
+                alert(
+                    "Registration failed"
+                );
+            }
+        }
+
+    
+
+</script>
+</body>
+
+</html>
