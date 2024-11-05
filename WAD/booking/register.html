@@ -27,7 +27,7 @@
 
 
         <section class="body">
-            <form action="">
+            <form action="" id = "reg" >
                 <h1>Register</h1>
                 <div class="idk">
                     <label for="username" >Username</label>
@@ -35,14 +35,14 @@
                     <label for="password">Password</label>
                     <input type="text" name="password" id = "password">
                 </div>
-                <input type="submit" name="submit" onclick="register()">
+                <input type="submit" name="submit" >
         
         
             </form>
         </section>
 <script >
-    function register(){
-        // e.preventDefault()
+    function register(e){
+        e.preventDefault()
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
 
@@ -65,6 +65,10 @@
             }
         }
 
+
+    document.getElementById("reg").addEventListener(
+        "submit",register
+    )
     
 
 </script>
