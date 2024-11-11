@@ -1,40 +1,58 @@
 package JAVA.S5.chatapp_server_client;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Scanner;
 
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+// cd JAVA/S5/chatapp
 public class server {
-    
+    static Scanner reader = null;static PrintWriter sender = null;
+
     public static void main(String[] args) {
-        System.out.println("Waiting for connection...");
+
 
         try {
-            ServerSocket ss = new ServerSocket(1234);
+            ServerSocket ss = new ServerSocket(9801);
             Socket client = ss.accept();
-            System.out.println("Client Connected");
-            // for getting input
-            InputStream clientIn = client.getInputStream();
-            Scanner input = new Scanner(clientIn); 
-            // for sending data
-            OutputStream clientOut = client.getOutputStream();
-            PrintWriter writer = new PrintWriter(clientOut, true);
+            System.out.println("Client connected");
 
-            String message = input.nextLine(); // recive message from client
-            System.out.println(message);
+            InputStreamReader client_input = new InputStreamReader(client.getInputStream());
+            OutputStreamWriter client_output = new OutputStreamWriter(client.getOutputStream());
+            Scanner sc = new Scanner(System.in);
+
+            sender =  new PrintWriter(client_output,true);
+            reader = new Scanner(client_input);
+            
+
+            Thread printer = new Thread(
+                new Runnable() {
+                    public void run(){
+                        String msg = "";
+                        while(true){
+                            if(!(msg = reader.nextLine()).equals("bye")){
+                                System.out.println("client: "+msg);
+                            }else{
+                                break;
+                            }
+
+                        }
+                    }
+                }
+            );
+            printer.start();
 
 
-            writer.println("Hello from server"); // send message to client
-
+            String send =null;
+            while ((send =sc.nextLine())!= "bye") {
+                sender.println(send);
+            }
 
 
             ss.close();
-        } catch (Exception e) {
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
+        
     }
-    
 }

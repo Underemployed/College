@@ -92,6 +92,7 @@
 
     }
 
+
     function displayfromCart() {
         // Example books array
         const books = [
@@ -141,6 +142,9 @@
         // Set the innerHTML of the cards container once
         document.getElementById("cards").innerHTML = cardsHTML;
     }
+
+    window.onload = displayfromCart;
+
 
 
     function addToCart(title,description,cost){
