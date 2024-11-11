@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Underemployed - Home</title>
     <link rel="stylesheet" href="style.css">
-<style>
+    <style>
 
-</style>
+    </style>
 </head>
 
 <body>
-    <nav class = "navbar">
+    <nav class="navbar">
         <div class="logo"><a href="index.html">
-            Underemployed
-        </a></div>
+                Underemployed
+            </a></div>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">Map</a></li>
@@ -23,15 +24,146 @@
         </ul>
 
 
-        
+
     </nav>
 
-    <section class = "body">
+
+    <section class="body">
+        <div class="cards_title">Welcome </div>
+
+        <!-- 
+            CARDS
+        -->
+        <div class="cards" id ="cards">
+
+            <!-- 
+                CARD 1
+            -->
+
+            <div class="card">
+                <div class="img">aad</div>
+                <div class="card_title">
+                    Lorem ipsum dolor sit amet.
+                </div>
+                <div class="description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, ab.
+                </div>
+                <div class="cost">Cost: $300</div>
+                <button class = "btn"  onclick="addToCart('1','description',300)">Book</button>
+            </div>
+
+            <div class="card">
+                <div class="img">aad</div>
+                <div class="card_title">
+                    Lorem ipsum dolor sit amet.
+                </div>
+                <div class="description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, ab.
+                </div>
+                <div class="cost">Cost: $300</div>
+                <button class="btn" onclick="addToCart('2','description',300)">Book</button>
+            </div>
+            <div class="card">
+                <div class="img">aad</div>
+                <div class="card_title">
+                    Lorem ipsum dolor sit amet.
+                </div>
+                <div class="description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, ab.
+                </div>
+                <div class="cost">Cost: $300</div>
+                <button class="btn" onclick="addToCart('3','description',300)">Book</button>
+            </div>
+
+
+
+        </div>
 
 
     </section>
 
 
-    
+
 </body>
+
+<script>
+    function getItem(a){
+        return localStorage.getItem(a);
+
+    }
+
+    function displayfromCart() {
+        // Example books array
+        const books = [
+            {
+                title: "title",
+                description: "description",
+                cost: 300
+            },
+            {
+                title: "title1",
+                description: "description",
+                cost: 200
+            },
+            {
+                title: "title2",
+                description: "description",
+                cost: 400
+            }
+        ];
+
+        // Initialize an empty string to build up HTML
+        let cardsHTML = "";
+        let c = 1;
+
+        // Loop through each book and build the card HTML
+        books.forEach(book => {
+            const title = book.title;
+            const description = book.description;
+            const cost = book.cost;
+
+            const card = `
+        <!-- CARD ${c} -->
+        <div class="card">
+            <div class="img">Image Placeholder</div>
+            <div class="card_title">${title}</div>
+            <div class="description">${description}</div>
+            <div class="cost">Cost: $${cost}</div>
+            <button class="btn" onclick="addToCart('${title}', '${description}', ${cost})">Book</button>
+        </div>
+        `;
+
+            // Append this card to the cardsHTML string
+            cardsHTML += card;
+            c++;
+        });
+
+        // Set the innerHTML of the cards container once
+        document.getElementById("cards").innerHTML = cardsHTML;
+    }
+
+
+    function addToCart(title,description,cost){
+        let cart = getItem("cart");
+        cart = cart ? JSON.parse(cart) : [];
+
+        let total = getItem("total");
+        total = total ? parseFloat(total) : 0;
+    
+
+        item = {
+            title: title,
+            description : description,
+            cost:cost,
+        }
+
+        total +=cost;
+        cart.push(item);
+
+        localStorage.setItem("total",total);
+        localStorage.setItem("cart",JSON.stringify(cart));
+        console.log(localStorage);
+    }
+</script>
+
 </html>
