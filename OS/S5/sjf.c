@@ -54,9 +54,11 @@ int fcfs() {
     // first process
     ct[0] = at[0] + bt[0];
     tt[0] = ct[0] - at[0];
-    wt[0] =  at[0];
+    wt[0] =  0;
+    int time = ct[0];
     for (int i = 1; i < n;i++){
-        ct[i] = ct[i - 1] + bt[i];
+        if(time < at[i]) time = at[i];
+        ct[i] = time + bt[i];
         tt[i] = ct[i] - at[i]; // Turnaround time = Completion time - Arrival time
         wt[i] = tt[i] - bt[i]; // Waiting time = Turnaround time - Burst time
     }
