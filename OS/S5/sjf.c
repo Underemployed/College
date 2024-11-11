@@ -32,14 +32,15 @@ int fcfs() {
     }
     int ct[n], tt[n], wt[n];
     // nithins bubble sort dont mind
-    // sorting based on arrival time
+    // sorting based on burst time
     int count = 0;
     int swapped = 1;
     while(swapped){
         swapped = 0;
         for (int i = 0; i < n -1-count;i++){
             int j = i + 1;
-            if(at[i] > at[j]){
+            // bt and (if bt equal sort on at)
+            if(bt[i] > bt[j] || (bt[i] == bt[j] && at[i] > at[j])){
                 swap(&at[i], &at[j]);
                 swap(&bt[i], &bt[j]);
                 swap(&pid[i], &pid[j]);
@@ -49,11 +50,11 @@ int fcfs() {
         count++;
     }
     // sorting end
-    //fcfs calc
+    //sjf calc
     // first process
     ct[0] = at[0] + bt[0];
     tt[0] = ct[0] - at[0];
-    wt[0] =   at[0];
+    wt[0] =  at[0];
     for (int i = 1; i < n;i++){
         ct[i] = ct[i - 1] + bt[i];
         tt[i] = ct[i] - at[i]; // Turnaround time = Completion time - Arrival time
