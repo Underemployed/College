@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">Underemployed</div>
+        <ul class="nav_items">
+            <li class="nav_item"><a href="index.html">Home</a></li>
+            <li class="nav_item"><a href="booking.html">cart</a></li>
+            <li class="nav_item"><a href="login.html">login</a></li>
+            <li class="nav_item"><a href="register.html">register</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <form action="" id="form">
+            <div class="form_title">Booking</div>
+
+            <select name="from" id="from" >
+                <option value="" hidden>FROM</option>
+                <option value="TVM">TVM</option>
+                <option value="KLM">KLM</option>
+                <option value="ERN">ERN</option>
+            </select>
+            TO
+            <select name="to" id="to" >
+                <option value="" hidden>TO</option>
+                <option value="TVM">TVM</option>
+                <option value="KLM">KLM</option>
+                <option value="ERN">ERN</option>
+            </select> 
+
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" name="name" >
+            </div>
+
+            <div>
+                <label for="age">Age:</label>
+                <input type="number" name="age" value=18 min="18" max =60 >
+            </div>
+            <div>
+                <label for="ticket">Ticket:</label>
+                <input type="number" name="ticket" value=1 min=1   placeholder="Number of tickets">
+            </div>
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="date" >
+          
+            </div>
+
+            <select name="cls" id="cls" >
+                <option value="" hidden>CLASS</option>
+                <option value="AC">AC</option>
+                <option value="SL">SL</option>
+
+            </select>
+            <div class="block">
+                            <input type="submit" class="" name="" value="BOOK" id="">
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        document.getElementById('date').valueAsDate = new Date();
+    </script>
+
+</body>
+
+</html>
+<script>
+    document.getElementById('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        // Validate date
+        const selectedDate = new Date(formData.get('date')).toDateString();
+        const today = new Date().toDateString();
+        console.log(selectedDate, today);
+        if (new Date(formData.get('date')).toDateString() < new Date().toDateString() && new Date(formData.get('date')).toDateString() != new Date().toDateString()) {
+            alert("Please select a date after " + today);
+            return;
+        }
+
+        const fare = {
+            "TVM-KLM":100,
+            "TVM-ERN":200,
+            "KLM-ERN":100
+        }
+   
+        const from = formData.get("from")
+        const to = formData.get("to");
+        let cls;
+        let route = from+"-"+to;
+        if(!fare[route]){
+            route = to+"-"+from;
+        }
+        if(formData.get("cls") == "AC") cls = 2;
+        else cls = 1;
+        if (!fare[route]) {
+            alert("Invalid route selected. "+route);
+            return;
+        }
+        let total = fare[route] * cls * parseFloat(formData.get("ticket"));        
+        const ticketDetails = `Name: ${formData.get('name')}
+            Age: ${formData.get('age')}
+            From: ${from}
+            To: ${to}
+            Date: ${formData.get('date')}
+            Class: ${formData.get('cls')}
+            Tickets: ${formData.get('ticket')}
+            Total Fare: ${total}
+        `;
+
+        alert(ticketDetails);
+
+        let a = localStorage.getItem('a');
+        a = a ? JSON.parse(a) : [];
+        a.push(ticketDetails.split("\n").join("<br>"));
+        a = JSON.stringify(a);
+        localStorage.setItem("a",a);
+        console.log(localStorage.getItem("a"));
+        
+    });
+</script>

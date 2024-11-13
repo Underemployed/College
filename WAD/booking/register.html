@@ -26,52 +26,63 @@
     </nav>
 
 
-        <section class="body">
-            <form action="" id = "reg" >
-                <h1>Register</h1>
-                <div class="idk">
-                    <label for="username" >Username</label>
-                    <input type="text" name="username" id = "username">
-                    <label for="password">Password</label>
-                    <input type="text" name="password" id = "password">
-                </div>
-                <input type="submit" name="submit" >
-        
-        
-            </form>
-        </section>
-<script >
-    function register(e){
-        e.preventDefault()
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
+    <section class="body">
+        <form action="" id="reg">
+            <h1>Register</h1>
+            <div class="idk">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username">
+                <label for="password">Password</label>
+                <input type="text" name="password" id="password">
+            </div>
+            <input type="submit" name="submit">
 
-        if(username && password) {
-            if (!localStorage.getItem(username)){
 
-                localStorage.setItem(username,password)
-                alert("Registration successful");
-                window.location.href = "login.html";
-            } else {
+        </form>
+    </section>
+    <script>
+        function register(e) {
+            e.preventDefault()
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username && password) {
+                if (!localStorage.getItem(username)) {
+
+                    if (
+                        /[a-z]/.test(password) &&
+                        /[1-9]/.test(password) &&
+                        /[A-Z]/.test(password)
+
+                    ) {
+                        localStorage.setItem(username, password);
+                        window.location.href = "login.html";
+
+                    } else {
+                        alert("Password must contain at least one uppercase letter, one lowercase letter, and one number.");
+                    }
+
+
+                } else {
+                    alert(
+                        "Registration failed"
+                    );
+                }
+            }
+            else {
                 alert(
                     "Registration failed"
                 );
             }
         }
-            else{
-                alert(
-                    "Registration failed"
-                );
-            }
-        }
 
 
-    document.getElementById("reg").addEventListener(
-        "submit",register
-    )
-    
+        document.getElementById("reg").addEventListener(
+            "submit", register
+        )
 
-</script>
+
+    </script>
 </body>
 
 </html>
