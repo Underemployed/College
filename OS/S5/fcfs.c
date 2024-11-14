@@ -55,17 +55,17 @@ int fcfs() {
     tt[0] = ct[0] - at[0];
     wt[0] =  0;
     int time = ct[0];
-for (int i = 1; i < n; i++) {
-    // skipping time if process hasnt arrived
-    if (time < at[i]) {
-        time = at[i]; 
+    for (int i = 1; i < n; i++) {
+        // skipping time if process hasnt arrived
+        if (time < at[i]) {
+            time = at[i]; 
+        }
+        
+        ct[i] = time + bt[i];          
+        tt[i] = ct[i] - at[i];          // Turnaround time
+        wt[i] = tt[i] - bt[i];          // Waiting time
+        time = ct[i];                
     }
-    
-    ct[i] = time + bt[i];          
-    tt[i] = ct[i] - at[i];          // Turnaround time
-    wt[i] = tt[i] - bt[i];          // Waiting time
-    time = ct[i];                
-}
     // results
     printf("PID\tAT\tBT\tCT\tWT\tTT\n");
     for (i = 0; i < n; i++) {
@@ -78,7 +78,7 @@ for (int i = 1; i < n; i++) {
 
 
 int main() {
-    // srand(time(NULL)); // for randomness
+    srand(time(NULL)); // for randomness
     fcfs();
     return 0;
 }
