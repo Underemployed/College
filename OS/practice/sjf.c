@@ -48,20 +48,6 @@ int main(){
             p[i].completed = 0;
     }
 
-    // int count = 0;
-    // int notsorted = 1;
-    // while(notsorted){
-    //     notsorted = 0;
-    //     for (int i = 0; i < n - count - 1;i++){
-    //         if(p[i].at > p[i+1].at){
-    //             swap(&p[i], &p[i + 1]);
-    //             notsorted = 1;
-    //         }
-    
-    //     }
-    //     count++;
-    // }
-
     int completed = 0;
     int time = 0;
     while(completed < n){
