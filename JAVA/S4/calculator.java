@@ -1,4 +1,4 @@
-package JAVA;
+package JAVA.S4;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

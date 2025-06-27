@@ -20,7 +20,7 @@
 
 // cant instantiate
 // abstract methods must be implemented in sub class
-package JAVA;
+package JAVA.S4;
 abstract class Animal{
     // only stuff with keyword is abstract must be implemented in subclass
     // cant be instantiated (object cant be created)

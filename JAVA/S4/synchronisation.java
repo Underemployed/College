@@ -1,4 +1,4 @@
-package JAVA;
+package JAVA.S4;
 
 /**
  * synchronisation

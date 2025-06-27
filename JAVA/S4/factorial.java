@@ -1,4 +1,4 @@
-package JAVA.LAB;
+package JAVA.S4;
 
 public class factorial {
     public static int fact(int n){

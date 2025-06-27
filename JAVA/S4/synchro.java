@@ -1,7 +1,7 @@
 
 
 
-package JAVA;
+package JAVA.S4;
 import java.lang.*;
 class synchro {
     public static void main(String[] args) throws Exception {

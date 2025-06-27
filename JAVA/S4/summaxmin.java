@@ -1,4 +1,4 @@
-package JAVA.LAB;
+package JAVA.S4;
 
 import java.util.Random;
 
