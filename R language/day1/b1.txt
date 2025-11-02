@@ -1,0 +1,35 @@
+
+library(MASS)
+library(ggplot2)
+data(Boston)
+
+head(Boston)
+summary(Boston)
+
+colSums(is.na(Boston))
+
+boston_clean =  na.omit(Boston)
+
+summary(boston_clean)
+cm= cor(boston_clean)
+
+round(cm[,"medv"],2)
+
+set.seed(123)
+
+boston_clean = sample(2,nrow(boston_clean),replace =True, prob(0.7,0.3))
+
+tr =  boston_clean[index == 1,]
+te =  boston_clean[index == 2,]
+
+model = lm(medv~rm,data = tr)
+
+pred =  predict(model,newdata = te)
+
+actual = test$medv
+
+RMSE =  sqrt (mean( (pred -actual)^2))
+mae = sqrt (mean(abs(pred-actual)))
+
+sst =  sum(actual)
+summary(model)

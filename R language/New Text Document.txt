@@ -1,0 +1,19 @@
+install.packages(c("dplyr","ggplot2"))
+
+library(iris)
+iris = iris[,1:4]
+
+head(iris)
+#View(iris)
+
+sum(is.na(iris))
+iris = na.omit(iris)
+cm = cor(iris)
+
+round(cm,2)
+
+# scale data 
+iris = scale(iris)
+
+iris =as.data.fram(iris)
+plot(iris$Petal.Width, iris$Petal.Height)

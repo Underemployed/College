@@ -1,0 +1,32 @@
+# 1. Install packages (only need to do this once)
+install.packages(c("dplyr", "ggplot2", "corrplot"))
+
+# 2. Load the libraries you need
+library(dplyr)
+library(ggplot2)
+library(corrplot)
+
+# 3. Load and prepare the data (no 'library(iris)' needed)
+# We select only the 4 numeric columns
+iris_data <- iris[, 1:4]
+
+# 4. Check for missing data
+sum(is.na(iris_data))
+iris_data <- na.omit(iris_data) 
+# 5. Create the correlation matrix (using the unscaled data)
+cm <- cor(iris_data)
+round(cm, 2)
+
+# 6. Plot the correlation matrix
+corrplot(cm, method = "circle")
+
+# 7. Scale the data for clustering (K-Means, etc.)
+iris_scaled <- scale(iris_data)
+iris_scaled <- as.data.frame(iris_scaled)
+
+# 8. Plot the scaled data
+# <-- FIX #2: Changed Petal.Height to Petal.Length
+plot(iris_scaled$Petal.Width, iris_scaled$Petal.Length,
+     main = "Scaled Petal Length vs. Width",
+     xlab = "Petal Width (Scaled)",
+     ylab = "Petal Length (Scaled)")

@@ -1,0 +1,21 @@
+
+```{r}
+data(Titanic)
+titanic <- as.data.frame(Titanic)
+# head(titanic)
+# titanic = titanic[1:10, c("Class","Sex")]
+#   rows , columns?
+
+# View(titanic)
+
+first_class_adult = subset(titanic, Class == "1st" & Age == "Adult")
+# first_class_adult
+first_class_adult = aggregate(Freq ~ Survived, data = first_class_adult, sum)
+first_class_adult
+
+pie(first_class_adult$Freq, labels = first_class_adult$Survived)
+ 
+
+# male 
+
+```

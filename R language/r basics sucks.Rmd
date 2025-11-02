@@ -1,0 +1,157 @@
+1. run this in terminal first igg
+
+```{r}
+install.packages("languageserver")
+```
+
+
+2. hellow fucking world
+
+```{r}
+"hellow world"
+6+1*3
+1:10
+```
+
+```{r}
+for(x in 1:10){
+    print(x)
+}
+```
+
+```{r}
+a = 'Nithin'
+a
+b <- 5
+b
+b + a # ERRRORR cant add num with string
+# print("the fuc",a) ERRRORR
+
+ a = paste(b,a)
+ print(a)
+```
+
+
+```{r}
+a = b = 3
+a +b
+
+
+# Legal variable names:
+myvar <- "John"
+my_var <- "John"
+myVar <- "John"
+MYVAR <- "John"
+myvar2 <- "John"
+.myvar <- "John"
+
+# Illegal variable names:
+2myvar <- "John"
+my-var <- "John"
+my var <- "John"
+_my_var <- "John" # waa
+my_v@ar <- "John" 
+TRUE <- "John" 
+```
+
+Basic data types in R can be divided into the following types:
+
+    numeric - (10.5, 55, 787)
+    integer - (1L, 55L, 100L, where the letter "L" declares this as an integer)
+    complex - (9 + 3i, where "i" is the imaginary part)
+    character (a.k.a. string) - ("k", "R is exciting", "FALSE", "11.5")
+    logical (a.k.a. boolean) - (TRUE or FALSE)
+
+
+```{r}
+# numeric
+a = 10.44
+class(a)
+a = 10;class(a)
+a = 9+ 1i; class(a)
+a = "k dsds" ;class(a) 
+a = TRUE
+```
+
+# Math
+```{r}
+abs(-4)
+ceiling(4.1)
+floor(4.1)
+max(5,10,3)
+max(c(5,10,3))
+sqrt(16)
+```
+
+
+
+# string multinline
+
+
+```{r}
+ str <- "Lorem ipsum dolor sit amet,
+consectetur adipiscing elit,
+sed do eiusmod tempor incididunt
+ut labore et dolore magna aliqua."
+str
+cat(str) 
+```
+
+# wtvr
+
+```{r}
+ a <- 200
+b <- 33
+c <- 500
+
+if (a > b | a > c & a & b) {
+  print("At least one of the conditions is true")
+}
+```
+
+```{r}
+i = 1;
+while(i <10){
+    i = i+1
+    if(i%%2 == 0) next
+
+    print(i)
+}
+fruits =  c(2,2,3,4) # all num
+
+for(i in fruits){
+    print(i)
+}
+
+fruits =  c("2",2,3,4) # all character even if one str
+
+for(i in fruits){
+    print(i)
+}
+
+
+
+fruits =  list("2",2,3,4) # as specified no change
+
+for(i in fruits){
+    print(i)
+}
+```
+
+
+```{r}
+g <- factor(c("Male", "Female", "Female", "Male"))
+print(g)
+levels(g)
+
+
+
+```
+
+
+
+```{r}
+scores <- c(65,70,68,75,80,85,88,90,95)
+boxplot(scores, main="Boxplot of Scores", ylab="Marks", col="orange")
+
+```
